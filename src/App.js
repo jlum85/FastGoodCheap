@@ -1,24 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import Switch from "./Switch";
 
 function App() {
+  let [ck1, setCheck1] = useState(false);
+  let [ck2, setCheck2] = useState(true);
+  let [ck3, setCheck3] = useState(false);
+
+  // console.log(ck1, ck2, ck3);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch
+        lib="FAST"
+        color="#B5696E"
+        checked={ck1}
+        onHandle={() => {
+          setCheck1(!ck1);
+          if (ck2 && ck3) {
+            setCheck3(false);
+          }
+        }}
+      />
+      <Switch
+        lib="GOOD"
+        color="#8FBF70"
+        checked={ck2}
+        onHandle={() => {
+          setCheck2(!ck2);
+          if (ck1 && ck3) {
+            setCheck1(false);
+          }
+        }}
+      />
+      <Switch
+        lib="CHEAP"
+        color="#6A84C0"
+        checked={ck3}
+        onHandle={() => {
+          // console.log("click CHEAP");
+          setCheck3(!ck3);
+          if (ck2 && ck1) {
+            setCheck2(false);
+          }
+        }}
+      />
     </div>
   );
 }
